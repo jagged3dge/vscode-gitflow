@@ -91,10 +91,10 @@
     ],
     "configuration": {
       "properties": {
-        "gitflow.squashCommitsOnFinish": {
+        "gitflow.squashFeatureDuringMerge": {
           "type": "boolean",
           "default": false,
-          "description": "After finishing a branch, squash commits"
+          "description": "Squash feature during merge"
         },
         "gitflow.deleteBranchOnFinish": {
           "type": "boolean",

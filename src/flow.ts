@@ -385,13 +385,31 @@ export namespace flow.feature {
                 pr.report({
                     message: `Merging ${feature_branch.name} into ${develop.name}...`,
                 })
+
+                let mergeFlag = '--no-ff'
+                let squashCommitMsg: string | undefined
+                
+                const cnt = await cmd.execute(git.info.path, ['rev-list', '--count', 'HEAD', `^${develop.name}`])
+                if (cnt.stdout.trim() === '1') {
+                    // fast-forward merge if only 1 change
+                    mergeFlag = '--ff'
+                } else if (config.squashFeatureDuringMerge) {
+                    squashCommitMsg = await vscode.window.showInputBox({
+                        prompt: 'Squash commit message',
+                        value: `Merge branch '${feature_branch.name}' into ${develop.name}`
+                    })
+
+                    mergeFlag = '--squash'
+                }
+
                 // Switch to develop and merge in the feature branch
                 await git.checkout(develop)
                 const result = await cmd.execute(git.info.path, [
                     'merge',
-                    '--no-ff',
+                    mergeFlag,
                     feature_branch.name,
                 ])
+
                 if (result.retc) {
                     // Merge conflict. Badness
                     await fs.writeFile(gitflowDir, develop.name)
@@ -399,6 +417,12 @@ export namespace flow.feature {
                         message: `There were conflicts while merging into ${develop.name}. Fix the issues before trying to finish the ${branchType} branch`,
                     })
                 }
+
+                if (squashCommitMsg) {
+                    // this is not fully merged, you will get error in finishing cleanup
+                    await cmd.execute(git.info.path, ['commit', '-m', squashCommitMsg])
+                }
+
                 pr.report({ message: 'Cleaning up...' })
                 await finishCleanup(feature_branch, branchType)
             }
