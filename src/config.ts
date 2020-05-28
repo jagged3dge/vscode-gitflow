@@ -9,8 +9,8 @@ class ConfigReader {
         return val
     }
 
-    get squashCommitsOnFinish(): boolean {
-        return this._readConfig<boolean>('squashCommitsOnFinish', false)
+    get squashFeatureDuringMerge(): boolean {
+        return this._readConfig<boolean>('squashFeatureDuringMerge', false)
     }
     
     get deleteBranchOnFinish(): boolean {

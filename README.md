@@ -5,11 +5,14 @@
 This extension provides integration and support for [gitflow](http://nvie.com/posts/a-successful-git-branching-model/). It is based on [this gitflow implementation](https://github.com/nvie/gitflow) and intends to be fully compatible with it.
 
 ## ✨ What's new
-* Workspace support
+* Workspace support 🥳
+* Squash feature during merge (default: false)
+* Fast-forward merge feature into develop branch if only 1 commit
 * Better error message
-* TODO
-    - Squash commits on finish feature or release branches
-    - Add gitflow funtions into SCM
+
+### 📒 Todoist
+* Setting to allow fast-forward merge feature
+* Add gitflow funtions into SCM
 
 ## 🏁 Getting Started
 
