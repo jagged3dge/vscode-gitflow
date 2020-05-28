@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2020-05-29
+### Added
+- squashFeatureDuringMerge: squash feature during merge
+### Changed
+- Fast-forward merge feature into develop branch if only 1 commit
+
 ## [2.0.0] - 2020-05-11
 ### Added
 - Workspace support
