@@ -386,47 +386,43 @@ export namespace flow.feature {
                     message: `Merging ${feature_branch.name} into ${develop.name}...`,
                 })
 
-                if (config.squashCommitsOnFinish) {
-                    const squashCommitMsg = await vscode.window.showInputBox({
+                let mergeFlag = '--no-ff'
+                let squashCommitMsg: string | undefined
+                
+                const cnt = await cmd.execute(git.info.path, ['rev-list', '--count', 'HEAD', `^${develop.name}`])
+                if (cnt.stdout.trim() === '1') {
+                    // fast-forward merge if only 1 change
+                    mergeFlag = '--f'
+                } else if (config.squashFeatureDuringMerge) {
+                    squashCommitMsg = await vscode.window.showInputBox({
                         prompt: 'Squash commit message',
                         value: `Merge branch '${feature_branch.name}' into ${develop.name}`
                     })
 
-                    await git.checkout(develop)
-
-                    let result = await cmd.execute(git.info.path, [
-                        'merge',
-                        '--squash',
-                        feature_branch.name,
-                    ])
-                    if (result.retc) {
-                        // Merge squash error
-                        fail.error({
-                            message: `There were conflicts while merging into ${develop.name}. Fix the issues before trying to finish the ${branchType} branch`,
-                        })
-                    }
-
-                    if (squashCommitMsg) {
-                        await cmd.execute(git.info.path, ['commit', '-m', squashCommitMsg])
-                    } else {
-                        await cmd.execute(git.info.path, ['commit'])
-                    }
-                } else {
-                    // Switch to develop and merge in the feature branch
-                    await git.checkout(develop)
-                    const result = await cmd.execute(git.info.path, [
-                        'merge',
-                        '--no-ff',
-                        feature_branch.name,
-                    ])
-                    if (result.retc) {
-                        // Merge conflict. Badness
-                        await fs.writeFile(gitflowDir, develop.name)
-                        fail.error({
-                            message: `There were conflicts while merging into ${develop.name}. Fix the issues before trying to finish the ${branchType} branch`,
-                        })
-                    }
+                    mergeFlag = '--squash'
                 }
+
+                // Switch to develop and merge in the feature branch
+                await git.checkout(develop)
+                const result = await cmd.execute(git.info.path, [
+                    'merge',
+                    mergeFlag,
+                    feature_branch.name,
+                ])
+
+                if (result.retc) {
+                    // Merge conflict. Badness
+                    await fs.writeFile(gitflowDir, develop.name)
+                    fail.error({
+                        message: `There were conflicts while merging into ${develop.name}. Fix the issues before trying to finish the ${branchType} branch`,
+                    })
+                }
+
+                if (squashCommitMsg) {
+                    // this is not fully merged, you will get error in finishing cleanup
+                    await cmd.execute(git.info.path, ['commit', '-m', squashCommitMsg])
+                }
+
                 pr.report({ message: 'Cleaning up...' })
                 await finishCleanup(feature_branch, branchType)
             }
