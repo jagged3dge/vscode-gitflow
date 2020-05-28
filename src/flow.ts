@@ -392,7 +392,7 @@ export namespace flow.feature {
                 const cnt = await cmd.execute(git.info.path, ['rev-list', '--count', 'HEAD', `^${develop.name}`])
                 if (cnt.stdout.trim() === '1') {
                     // fast-forward merge if only 1 change
-                    mergeFlag = '--f'
+                    mergeFlag = '--ff'
                 } else if (config.squashFeatureDuringMerge) {
                     squashCommitMsg = await vscode.window.showInputBox({
                         prompt: 'Squash commit message',
