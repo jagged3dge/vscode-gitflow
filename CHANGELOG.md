@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.0] - 2020-05-29
 ### Added
-- squashFeatureDuringMerge: squash feature during merge
+- New configuration options:
+	- `squashFeatureDuringMerge`: squash feature during merge
 ### Changed
 - Fast-forward merge feature into develop branch if only 1 commit
 
@@ -69,3 +70,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed missing push of `master` and tags after finishing a release or a
   hotfix.
+
+[Unreleased]: https://github.com/anhthang/vscode-gitflow/compare/2.1.0...HEAD
+[2.1.0]: https://github.com/anhthang/vscode-gitflow/compare/2.0.0...2.1.0
+[2.0.0]: https://github.com/anhthang/vscode-gitflow/compare/1.2.0...2.0.0
+[1.2.0]: https://github.com/anhthang/vscode-gitflow/compare/1.1.2...1.2.0
+[1.1.2]: https://github.com/anhthang/vscode-gitflow/compare/1.1.1...1.1.2
+[1.1.1]: https://github.com/anhthang/vscode-gitflow/compare/1.1.0...1.1.1
+[1.1.0]: https://github.com/anhthang/vscode-gitflow/compare/1.0.0...1.1.0
+[1.0.0]: https://github.com/anhthang/vscode-gitflow/compare/0.1.0...1.0.0
+[0.1.0]: https://github.com/anhthang/vscode-gitflow/compare/0.0.5...0.1.0
+[0.0.5]: https://github.com/anhthang/vscode-gitflow/releases/tag/0.0.5
