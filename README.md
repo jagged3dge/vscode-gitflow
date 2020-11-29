@@ -25,7 +25,7 @@ If you already have gitflow set up for your repository, just start execcuting gi
 
 ## 🎬 Summary
 
-![gitflow workflow](res/flow.svg)
+![gitflow workflow](res/flow.png)
 
 1. A `develop` branch is created from `master`
 
