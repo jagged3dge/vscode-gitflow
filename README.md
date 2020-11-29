@@ -1,11 +1,12 @@
 # Gitflow integration for Visual Studio Code
 
-[![marketplace](https://flat.badgen.net/vs-marketplace/v/buianhthang.gitflow)](https://marketplace.visualstudio.com/items?itemName=buianhthang.gitflow) ![installs](https://flat.badgen.net/vs-marketplace/i/buianhthang.gitflow) ![downloads](https://flat.badgen.net/vs-marketplace/d/buianhthang.gitflow) ![rating](https://flat.badgen.net/vs-marketplace/rating/buianhthang.gitflow)
+[![Version](https://img.shields.io/visual-studio-marketplace/v/buianhthang.gitflow?style=for-the-badge&logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=buianhthang.gitflow) ![Installs](https://img.shields.io/visual-studio-marketplace/i/buianhthang.gitflow?style=for-the-badge) ![Downloads](https://img.shields.io/visual-studio-marketplace/d/buianhthang.gitflow?style=for-the-badge) ![Rating](https://img.shields.io/visual-studio-marketplace/r/buianhthang.gitflow?style=for-the-badge)
 
 This extension provides integration and support for [gitflow](http://nvie.com/posts/a-successful-git-branching-model/). It is based on [this gitflow implementation](https://github.com/nvie/gitflow) and intends to be fully compatible with it.
 
 ## ✨ What's new
 * Workspace support 🥳
+* Git Submodules support 🥳
 * Squash feature during merge (default: false)
 * Fast-forward merge feature into develop branch if only 1 commit
 * Better error message
@@ -16,25 +17,29 @@ This extension provides integration and support for [gitflow](http://nvie.com/po
 
 ## 🏁 Getting Started
 
+Firstly, you always have to *Initialize repository for gitflow* for your repository, then follow the command prompts and accept the defaults or write your release/production branch name.
+
 If you already have gitflow set up for your repository, just start execcuting gitflow commands from the Command Palette!
 
-![Opening example](res/gitflow.png)
+![gitflow commands](res/gitflow.png)
 
-## 🎬 Starting from Scratch
+## 🎬 Summary
 
-1. First, initialize git:
-```sh
-$ git init
-```
-2. Open the VS Code Command Palette and type 'gitflow'
+![gitflow workflow](res/flow.svg)
 
-3. Select 'Initialize repository for gitflow'
+1. A `develop` branch is created from `master`
 
-4. Follow the command prompts and accept the defaults...
+2. A `release` branch is created from `develop`
 
-![default](res/default.png)
+3. `Feature` branches are created from `develop`
 
-5. Setup complete!
+4. When a `feature` is complete it is merged into the `develop` branch
+
+5. When the `release` branch is done it is merged into `develop` and `master`
+
+6. If an issue in `master` is detected a `hotfix` branch is created from `master`
+
+7. Once the `hotfix` is complete it is merged to both `develop` and `master`
 
 ## 📝 Note
 

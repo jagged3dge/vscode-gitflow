@@ -2,7 +2,7 @@
   "name": "gitflow",
   "displayName": "gitflow",
   "description": "Gitflow integration and support in Visual Studio Code",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "publisher": "buianhthang",
   "repository": {
     "type": "git",
@@ -120,8 +120,8 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "./node_modules/typescript/bin/tsc -p ./",
-    "compile": "./node_modules/typescript/bin/tsc -watch -p ./",
+    "vscode:prepublish": "node ./node_modules/typescript/bin/tsc -p ./",
+    "compile": "node ./node_modules/typescript/bin/tsc -watch -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "devDependencies": {
