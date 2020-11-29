@@ -6,6 +6,7 @@ This extension provides integration and support for [gitflow](http://nvie.com/po
 
 ## ✨ What's new
 * Workspace support 🥳
+* Git Submodules support 🥳
 * Squash feature during merge (default: false)
 * Fast-forward merge feature into develop branch if only 1 commit
 * Better error message
