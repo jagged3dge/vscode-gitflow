@@ -75,8 +75,8 @@ async function selectRepo() {
   }
 
   if (!!currentRepo) {
-    flow.workingDir = currentRepo.rootUri.path;
-    flow.workingRepo = basename(currentRepo.rootUri.path);
+    flow.workingDir = currentRepo.rootUri.fsPath;
+    flow.workingRepo = basename(currentRepo.rootUri.fsPath);
   }
 }
 
@@ -116,7 +116,7 @@ async function setup(disposables: vscode.Disposable[]) {
   const commands = [
     vscode.commands.registerCommand('gitflow.initialize', async () => {
       await selectRepo();
-      // await runWrapped(flow.initialize)
+      await runWrapped(flow.initialize)
     }),
     vscode.commands.registerCommand('gitflow.featureStart', async () => {
       await selectRepo();
